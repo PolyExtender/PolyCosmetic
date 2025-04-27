@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PolyExtender - PolyCosmetic</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body, html {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d1117;
+      color: #e4e6eb;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #00e5ff;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: #00c8ff;
+      text-decoration: none;
+    }
+
+    /* Header & Navigation */
+    nav {
+      background: transparent;
+      box-shadow: none;
+      transition: all 0.4s ease;
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .scrolled-nav {
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      box-shadow: 0 2px 15px rgba(0, 229, 255, 0.1);
+    }
+
+    .nav-wrapper {
+      padding: 0 20px;
+    }
+
+    .nav-wrapper .brand-logo {
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-logo:before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e5ff;
+      margin-right: 10px;
+      box-shadow: 0 0 15px #00e5ff;
+    }
+
+    .nav-wrapper ul li a {
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-wrapper ul li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: #00e5ff;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-wrapper ul li a:hover:after {
+      width: 70%;
+    }
+
+    .nav-wrapper ul li a.active:after {
+      width: 70%;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(13, 17, 23, 0.9) 0%, rgba(13, 17, 23, 0.8) 100%), url('/api/placeholder/1920/1080') no-repeat center;
+      background-size: cover;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 20px 60px;
+    }
+
+    .hero:before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 100px;
+      background: #0d1117;
+      bottom: -50px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .hero:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, transparent 80%);
+      top: 0;
+      left: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      font-size: 4rem;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: 2px;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
+      }
+    }
+
+    .hero p {
+      font-weight: 400;
+      margin: 20px 0 0;
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    /* Search Section */
+    .search-section {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+      margin-top: -80px;
+    }
+
+    .search-container {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 229, 255, 0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid rgba(0, 229, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-container:before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+      top: -50px;
+      right: -50px;
+      border-radius: 50%;
+    }
+
+    .search-container .form-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .search-container .form-title:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: #00e5ff;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Search Input */
+    .search-input-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-field input[type=text] {
+      border: 2px solid rgba(0, 229, 255, 0.3) !important;
+      border-radius: 30px !important;
+      box-shadow: none !important;
+      color: #fff;
+      font-size: 1.2rem;
+      background: rgba(13, 17, 23, 0.3);
+      padding: 10px 20px !important;
+      box-sizing: border-box;
+      height: 60px !important;
+      margin: 0 !important;
+    }
+
+    .input-field input[type=text]:focus {
+      border: 2px solid #00e5ff !important;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3) !important;
+    }
+
+    .input-field .helper-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      margin-top: 5px;
+      margin-left: 20px;
+    }
+
+    /* Search Button */
+    .btn-search {
+      background: linear-gradient(135deg, #00e5ff 0%, #00c8ff 100%);
+      color: #0d1117;
+      border-radius: 30px;
+      padding: 10px 40px;
+      height: 50px;
+      line-height: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);
+      display: block;
+      margin: 30px auto 0;
+      width: 180px;
+    }
+
+    .btn-search:hover, .btn-search:focus {
+      background: linear-gradient(135deg, #00c8ff 0%, #00e5ff 100%);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.6);
+      transform: translateY(-3px);
+    }
+
+    .btn-search i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+
+    /* Results Section */
+    .results-section {
+      padding: 60px 20px;
+    }
+
+    .results-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    }
+
+    .results-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      color: #fff;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .results-header h2:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      background: #00e5ff;
+      left: 0;
+      top: 0;
+      border-radius: 2px;
+    }
+
+    /* Cosmetic Items */
+    #cosmeticList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cosmetic-item {
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 229, 255, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      height: 100%;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cosmetic-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 229, 255, 0.2);
+      border-color: rgba(0, 229, 255, 0.3);
+    }
+
+    .cosmetic-image {
+      height: 200px;
+      background: rgba(13, 17, 23, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cosmetic-image img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .cosmetic-item:hover .cosmetic-image img {
+      transform: scale(1.05);
+    }
+
+    .cosmetic-details {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cosmetic-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .cosmetic-name:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background: #00e5ff;
+      bottom: 0;
+      left: 0;
+    }
+
+    .cosmetic-info {
+      margin: 15px 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cosmetic-info-item {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .info-label {
+      font-weight: 600;
+      min-width: 100px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .info-value {
+      flex: 1;
+    }
+
+    .cosmetic-price {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .cosmetic-price img {
+      height: 24px;
+    }
+
+    /* Rarity Badges */
+    .rarity-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      z-index: 1;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Rarity Colors */
+    .common {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .uncommon {
+      background: linear-gradient(135deg, rgba(30, 255, 0, 0.2) 0%, rgba(30, 255, 0, 0.1) 100%);
+      color: #1eff00;
+      border: 1px solid rgba(30, 255, 0, 0.3);
+    }
+
+    .rare {
+      background: linear-gradient(135deg, rgba(0, 112, 221, 0.2) 0%, rgba(0, 112, 221, 0.1) 100%);
+      color: #0070dd;
+      border: 1px solid rgba(0, 112, 221, 0.3);
+    }
+
+    .epic {
+      background: linear-gradient(135deg, rgba(163, 53, 238, 0.2) 0%, rgba(163, 53, 238, 0.1) 100%);
+      color: #a335ee;
+      border: 1px solid rgba(163, 53, 238, 0.3);
+    }
+
+    .legendary {
+      background: linear-gradient(135deg, rgba(255, 128, 0, 0.2) 0%, rgba(255, 128, 0, 0.1) 100%);
+      color: #ff8000;
+      border: 1px solid rgba(255, 128, 0, 0.3);
+    }
+
+    .mythic {
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.1) 100%);
+      color: #ff0000;
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+
+    .icon_series {
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0.1) 100%);
+      color: #00ffff;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .slurp {
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0.1) 100%);
+      color: #00ffff;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .gaming_legends {
+      background: linear-gradient(135deg, rgba(128, 0, 128, 0.2) 0%, rgba(128, 0, 128, 0.1) 100%);
+      color: white;
+      border: 1px solid rgba(128, 0, 128, 0.3);
+    }
+
+    .shadow {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
+      color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    .lava {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.2) 0%, rgba(255, 165, 0, 0.1) 100%);
+      color: orange;
+      border: 1px solid rgba(255, 165, 0, 0.3);
+    }
+
+    .frozen {
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0.1) 100%);
+      color: cyan;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .marvel {
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.1) 100%);
+      color: red;
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+
+    .star_wars {
+      background: linear-gradient(135deg, rgba(255, 255, 0, 0.2) 0%, rgba(255, 255, 0, 0.1) 100%);
+      color: yellow;
+      border: 1px solid rgba(255, 255, 0, 0.3);
+    }
+
+    .dc {
+      background: linear-gradient(135deg, rgba(128, 128, 128, 0.2) 0%, rgba(128, 128, 128, 0.1) 100%);
+      color: grey;
+      border: 1px solid rgba(128, 128, 128, 0.3);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .empty-icon {
+      font-size: 60px;
+      color: rgba(0, 229, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .empty-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .empty-description {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    /* Loading Animation */
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .loader-spinner {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .loader-spinner:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 6px solid #00e5ff;
+      border-color: #00e5ff transparent #00e5ff transparent;
+      animation: loader-animation 1.2s linear infinite;
+    }
+
+    @keyframes loader-animation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(to top, rgba(13, 17, 23, 1) 0%, rgba(17, 23, 35, 0.9) 100%);
+      padding: 60px 0 30px;
+      position: relative;
+    }
+
+    footer:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, rgba(0, 229, 255, 0.3) 50%, transparent 100%);
+      top: 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .copyright:before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background: #00e5ff;
+      left: 0;
+      top: 0;
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .footer-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: #00e5ff;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .footer-links a:hover {
+      color: #00e5ff;
+    }
+
+    .footer-links a:hover:after {
+      width: 70%;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .search-container {
+        padding: 30px;
+      }
+      
+      .results-header h2 {
+        font-size: 1.7rem;
+      }
+      
+      #cosmeticList {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .search-container {
+        padding: 25px;
+      }
+      
+      .form-title {
+        font-size: 1.5rem;
+      }
+      
+      .btn-search {
+        width: 100%;
+      }
+      
+      #cosmeticList {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .copyright {
+        padding-left: 0;
+      }
+      
+      .copyright:before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 0.9rem;
+      }
+      
+      .search-container {
+        padding: 20px;
+      }
+      
+      .form-title {
+        font-size: 1.3rem;
+      }
+      
+      .results-header h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav id="mainNav">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">PolyExtender</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="https://polyextender.github.io/">Home</a></li>
+          <li><a href="https://polyextender.github.io/PolyStreamLookup/">StreamLookup</a></li>
+          <li><a href="https://polyextender.github.io/PolyCosmetic/" class="active">PolyCosmetic</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>PolyCosmetic</h1>
+      <p>Discover and explore the entire Fortnite cosmetics collection</p>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="search-container">
+      <h3 class="form-title">Find Your Favorite Cosmetics</h3>
+      <div class="search-input-container">
+        <div class="input-field">
+          <input type="text" id="searchInput" placeholder="Search for skins, pickaxes, emotes and more...">
+          <span class="helper-text">Try searching for "Raven", "Peely", or "Midas"</span>
+        </div>
+      </div>
+      <button class="btn-search waves-effect waves-light" onclick="searchCosmetics()">
+        <i class="material-icons left">search</i>Search
+      </button>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="results-container">
+      <div class="results-header">
+        <h2>Search Results</h2>
+      </div>
+      
+      <div id="loader" class="loader">
+        <div class="loader-spinner"></div>
+      </div>
+      
+      <ul id="cosmeticList" class="cosmetic-list">
+        <!-- Cosmetic items will be displayed here -->
+      </ul>
+      
+      <div id="emptyState" class="empty-state">
+        <i class="material-icons empty-icon">search</i>
+        <h3 class="empty-title">Search for Fortnite Cosmetics</h3>
+        <p class="empty-description">Enter a cosmetic name above to start exploring the vast collection of Fortnite items!</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="copyright">
+          &copy; 2025 PolyExtender | All cosmetic data belongs to Epic Games
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/polyextender" target="_blank">GitHub</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+const apiKey = "8225bcc5-a917-437a-bf4e-57016969e317";
+const fortniteApiUrl = "https://fnbr.co/api/images";
+const cosmeticListUrl = "https://fortniteapi.io/v2/items/list?lang=en";
+const shopHistoryUrl = "https://fortniteapi.io/v2/items/get?lang=en";
+const fortniteApiIoApiKey = "89064f30-514adb24-3bbe4145-a8c96cc6";
+
+// Add event listener for Enter key press
+document.getElementById("searchInput").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        searchCosmetics();
+    }
+});
+
+function searchCosmetics() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const cosmeticList = document.getElementById('cosmeticList');
+
+    // Clear previous search results
+    cosmeticList.innerHTML = '';
+    
+    // Show loading indicator
+    const loadingItem = document.createElement('li');
+    loadingItem.classList.add('list-group-item');
+    loadingItem.innerHTML = '<div class="progress"><div class="indeterminate backer"></div></div><p class="center-align">Searching for cosmetics...</p>';
+    cosmeticList.appendChild(loadingItem);
+
+    // Fetch cosmetic data from Fortnite API
+    $.ajax({
+        url: `${fortniteApiUrl}?search=${searchInput}`,
+        method: 'GET',
+        headers: {
+            'x-api-key': apiKey
+        },
+        success: function (response) {
+            // Remove loading indicator
+            cosmeticList.innerHTML = '';
+            
+            const cosmetics = response.data;
+            
+            if (cosmetics && cosmetics.length > 0) {
+                displayCosmetics(cosmetics, cosmeticList);
+            } else {
+                // Display no results message
+                cosmeticList.innerHTML = `<li class="list-group-item no-results">
+                    <i class="material-icons">search_off</i>
+                    <p>No cosmetics found matching "${searchInput}"</p>
+                </li>`;
+            }
+        },
+        error: function(error) {
+            cosmeticList.innerHTML = `<li class="list-group-item no-results">
+                <i class="material-icons">error</i>
+                <p>Error searching for cosmetics: ${error.statusText || 'Unknown error'}</p>
+            </li>`;
+        }
+    });
+}
+
+function displayCosmetics(cosmetics, cosmeticList) {
+    cosmetics.forEach(cosmetic => {
+        // Fetch cosmetic ID
+        fetchCosmeticId(cosmetic, cosmeticList);
+    });
+}
+
+function fetchCosmeticId(cosmetic, cosmeticList) {
+    const cosmeticName = cosmetic.name.toLowerCase();
+
+    $.ajax({
+        url: `${cosmeticListUrl}&name=${encodeURIComponent(cosmeticName)}`,
+        method: 'GET',
+        headers: {
+            'Authorization': fortniteApiIoApiKey
+        },
+        success: function (response) {
+            const matchedItem = response.items && response.items.length > 0 ? response.items[0] : null;
+            const cosmeticId = matchedItem?.id;
+
+            if (cosmeticId) {
+                // If the ID is available, fetch shop history
+                fetchShopHistory(cosmetic, cosmeticId, cosmeticList);
+            } else {
+                // Display cosmetic without shop history
+                displayCosmeticInfo(cosmetic, cosmeticId, null, cosmeticList);
+            }
+        },
+        error: function() {
+            // Display cosmetic without ID or shop history if API call fails
+            displayCosmeticInfo(cosmetic, null, null, cosmeticList);
+        }
+    });
+}
+
+function fetchShopHistory(cosmetic, cosmeticId, cosmeticList) {
+    $.ajax({
+        url: `${shopHistoryUrl}&id=${cosmeticId}`,
+        method: 'GET',
+        headers: {
+            'Authorization': fortniteApiIoApiKey
+        },
+        success: function (response) {
+            const shopHistory = response.item?.shopHistory || [];
+            displayCosmeticInfo(cosmetic, cosmeticId, shopHistory, cosmeticList);
+        },
+        error: function() {
+            // Display cosmetic without shop history if API call fails
+            displayCosmeticInfo(cosmetic, cosmeticId, null, cosmeticList);
+        }
+    });
+}
+
+function displayCosmeticInfo(cosmetic, cosmeticId, shopHistory, cosmeticList) {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list-group-item', 'emote-card', 'animated');
+
+    // Create container for cosmetic info
+    const cosmeticContainer = document.createElement('div');
+    cosmeticContainer.classList.add('row');
+    
+    // Image column
+    const imageColumn = document.createElement('div');
+    imageColumn.classList.add('col', 's12', 'm4', 'emote-img-container');
+    
+    // Add image if available
+    if (cosmetic.images && cosmetic.images.icon) {
+        const img = document.createElement('img');
+        img.src = cosmetic.images.icon;
+        img.alt = cosmetic.name;
+        img.classList.add('emote-img');
+        imageColumn.appendChild(img);
+    } else {
+        imageColumn.innerHTML = '<i class="material-icons large">image_not_supported</i>';
+    }
+    
+    // Info column
+    const infoColumn = document.createElement('div');
+    infoColumn.classList.add('col', 's12', 'm8', 'emote-details');
+    
+    // Add colored rarity text
+    let rarityText = cosmetic.rarity.toLowerCase();
+    const raritySpan = document.createElement('span');
+    raritySpan.classList.add(rarityText);
+    raritySpan.textContent = cosmetic.rarity;
+    
+    // Display cosmetic name and rarity
+    const nameElement = document.createElement('h5');
+    nameElement.classList.add('emote-name');
+    nameElement.textContent = cosmetic.name;
+    nameElement.appendChild(document.createTextNode(' - '));
+    nameElement.appendChild(raritySpan);
+    infoColumn.appendChild(nameElement);
+    
+    // Display description
+    if (cosmetic.description) {
+        const descElement = document.createElement('p');
+        descElement.textContent = `Description: ${cosmetic.description}`;
+        infoColumn.appendChild(descElement);
+    }
+    
+    // Display type
+    if (cosmetic.readableType) {
+        const typeElement = document.createElement('p');
+        typeElement.textContent = `Type: ${cosmetic.readableType}`;
+        infoColumn.appendChild(typeElement);
+    }
+    
+    // Display cosmetic ID if available
+    if (cosmeticId) {
+        const idElement = document.createElement('p');
+        idElement.textContent = `Cosmetic ID: ${cosmeticId}`;
+        infoColumn.appendChild(idElement);
+    }
+    
+    // Display price if available
+    if (cosmetic.price) {
+        const priceElement = document.createElement('p');
+        const priceIcon = cosmetic.priceIconLink ? 
+            `<img src="https://image.fnbr.co/price/icon_vbucks.png" alt="V-Bucks" height="20px">` : '';
+        priceElement.innerHTML = `Price: ${priceIcon} ${cosmetic.price}`;
+        infoColumn.appendChild(priceElement);
+    }
+    
+    // Display shop history if available
+    if (shopHistory && shopHistory.length > 0) {
+        const historyElement = document.createElement('div');
+        historyElement.innerHTML = '<p><strong>Shop History:</strong></p>';
+        
+        const historyList = document.createElement('ul');
+        historyList.classList.add('collection');
+        
+        // Display the last 5 appearances
+        const recentHistory = shopHistory.slice(0, 5);
+        recentHistory.forEach(date => {
+            const historyDate = new Date(date);
+            const formattedDate = historyDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            const historyItem = document.createElement('li');
+            historyItem.classList.add('collection-item');
+            historyItem.textContent = formattedDate;
+            historyList.appendChild(historyItem);
+        });
+        
+        historyElement.appendChild(historyList);
+        
+        if (shopHistory.length > 5) {
+            const moreHistoryElement = document.createElement('p');
+            moreHistoryElement.textContent = `+ ${shopHistory.length - 5} more appearances`;
+            historyElement.appendChild(moreHistoryElement);
+        }
+        
+        infoColumn.appendChild(historyElement);
+    }
+    
+    // Assemble the cosmetic info container
+    cosmeticContainer.appendChild(imageColumn);
+    cosmeticContainer.appendChild(infoColumn);
+    listItem.appendChild(cosmeticContainer);
+    
+    // Add to cosmetic list
+    cosmeticList.appendChild(listItem);
+    
+    // Initialize Materialize components
+    M.AutoInit();
+}
+
+// Initialize search input field
+document.addEventListener('DOMContentLoaded', function() {
+    M.updateTextFields();
+    
+    // Focus on search input on page load
+    document.getElementById('searchInput').focus();
+});
+</script>
