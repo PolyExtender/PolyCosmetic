@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PolyExtender - PolyCosmetic</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'roboto', sans-serif;
+      background-color: #171C28;
+      color: #e4e6eb;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: #15ebd2;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #12d0b9;
+      text-decoration: none;
+    }
+
+    .backer {
+      background: linear-gradient(135deg, #15ebd2 0%, #12d0b9 100%);
+    }
+
+    .backer-dark {
+      background: #12d0b9;
+    }
+
+    nav {
+      box-shadow: none;
+      margin-bottom: 0;
+    }
+
+    .nav-wrapper ul li a {
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .page-header {
+      padding: 60px 0;
+      text-align: center;
+      background: linear-gradient(135deg, #15ebd2 0%, #0d9686 100%);
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .page-header h1 {
+      font-weight: 700;
+      margin: 0;
+      font-size: 2.8rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .page-header p {
+      font-weight: 400;
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-container {
+      background-color: #242C3D;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
+      position: relative;
+      top: -40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    /* Input field styling */
+    .input-field input[type=text] {
+      border-bottom: 2px solid #15ebd2 !important;
+      box-shadow: none !important;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .input-field input[type=text]:focus {
+      border-bottom: 2px solid #15ebd2 !important;
+    }
+
+    .input-field input[type=text] + label {
+      color: #97a0af;
+    }
+
+    .input-field input[type=text]:focus + label {
+      color: #15ebd2 !important;
+    }
+
+    /* Button styling */
+    .btn-search {
+      background-color: #15ebd2;
+      color: #171C28;
+      border-radius: 30px;
+      padding: 0 30px;
+      height: 48px;
+      line-height: 48px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(21, 235, 210, 0.3);
+    }
+
+    .btn-search:hover, .btn-search:focus {
+      background-color: #12d0b9;
+      box-shadow: 0 6px 15px rgba(21, 235, 210, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Results section */
+    .results-container {
+      padding: 0 20px;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #324156;
+    }
+
+    .results-header h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .results-stats {
+      color: #97a0af;
+      font-size: 1rem;
+    }
+
+    /* Emote card styling */
+    .emote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .emote-card {
+      background-color: #242C3D;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .emote-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(21, 235, 210, 0.2);
+    }
+
+    .emote-img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #1B2233;
+      height: 120px;
+    }
+
+    .emote-img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .emote-details {
+      padding: 15px;
+      flex: 1;
+    }
+
+    .emote-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0 0 10px 0;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .emote-provider {
+      font-size: 0.9rem;
+      color: #97a0af;
+      display: flex;
+      align-items: center;
+    }
+
+    .emote-provider i {
+      font-size: 16px;
+      margin-right: 5px;
+    }
+
+    /* Loading animation */
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .loader .preloader-wrapper {
+      display: inline-block;
+    }
+
+    /* No results state */
+    .no-results {
+      text-align: center;
+      padding: 60px 0;
+      color: #97a0af;
+    }
+
+    .no-results i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #324156;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: #1B2233;
+      padding: 30px 0;
+      margin-top: 60px;
+      color: #97a0af;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links a {
+      margin-left: 20px;
+      font-size: 0.9rem;
+      color: #97a0af;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #15ebd2;
+    }
+
+    /* Animation for emote cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Provider badges */
+    .provider-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
+    .provider-7tv {
+      background-color: rgba(100, 65, 164, 0.2);
+      color: #9373CC;
+    }
+
+    .provider-bttv {
+      background-color: rgba(88, 226, 193, 0.2);
+      color: #58E2C1;
+    }
+
+    .provider-ffz {
+      background-color: rgba(220, 157, 73, 0.2);
+      color: #DC9D49;
+    }
+
+    .provider-twitch {
+      background-color: rgba(145, 70, 255, 0.2);
+      color: #9146FF;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .page-header {
+        padding: 40px 0;
+      }
+      
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .search-container {
+        margin: 0 15px;
+        top: -30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .emote-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+      }
+      
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .page-header p {
+        font-size: 1rem;
+      }
+      
+      .search-container {
+        padding: 20px;
+      }
+    }
+    /* Add styles for rarity colors */
+.marvel {
+  color: red;
+  content: 'Marvel Series';
+}
+.star_wars {
+  color: yellow;
+  content: 'Star Wars Series';
+}
+.dc {
+  color: grey;
+  content: 'DC Series';
+}
+.common {
+  color: #ffffff;
+  content: 'Common';
+}
+.uncommon {
+  color: #1eff00;
+  content: 'Uncommon';
+}
+.rare {
+  color: #0070dd;
+  content: 'Rare';
+}
+.epic {
+  color: #a335ee;
+  content: 'Epic';
+}
+.legendary {
+  color: #ff8000;
+  content: 'Legendary';
+}
+.mythic {
+  color: #ff0000;
+  content: 'Mythic';
+}
+.icon_series {
+  color: #00ffff;
+  content: 'Icon Series';
+}
+.slurp {
+  color: #00ffff;
+  content: 'Slurp Series';
+}
+.gaming_legends {
+  color: white;
+  background-color: purple;
+  content: 'Gaming Legends';
+}
+.shadow {
+  color: #ffffff;
+  background-color: #000000;
+  content: 'Shadow Series';
+}
+.lava {
+  color: orange;
+  content: 'Lava Series';
+}
+.frozen {
+  color: cyan;
+  content: 'Frozen Series';
+}
+  </style>
+</head>
+<body>
+  <header class="z-depth-1">
+    <nav class="z-depth-0 backer-dark">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">PolyExtender</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="https://polyextender.github.io/">Home</a></li>
+          <li><a href="https://polyextender.github.io/PolyStreamLookup/">StreamLookup</a></li>
+           <li><a href="https://polyextender.github.io/PolyCosmetic/" class="active">PolyCosmetic</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>PolyCosmetic</h1>
+      <p>Fortnite Cosmetic Search </p>
+    </div>
+  </div>
+
+
+  
+  <main class="container">
+    <div class="search-container z-depth-2">
+<div class="container mt-5">
+         <h3 class="form-title">Enter a Fortnite Skin </h3>
+
+    <div class="input-field col s12 m8">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for cosmetics">
+        <div class="input-group-append">
+            <button class="btn-search btn waves-effect waves-light btn-large" onclick="searchCosmetics()">Search</button>
+        </div>
+    </div>
+
+    <ul id="cosmeticList" class="list-group">
+        <!-- Your cosmetic items will be displayed here -->
+    </ul>
+</div>
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="copyright">
+          &copy; 2025 PolyExtender
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/polyextender" target="_blank">GitHub</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+const apiKey = "8225bcc5-a917-437a-bf4e-57016969e317";
+const fortniteApiUrl = "https://fnbr.co/api/images";
+const cosmeticListUrl = "https://fortniteapi.io/v2/items/list?lang=en";
+const fortniteApiIoApiKey = "89064f30-514adb24-3bbe4145-a8c96cc6";
+     // Add event listener for Enter key press
+    document.getElementById("searchInput").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            searchCosmetics();
+        }
+    });
+function searchCosmetics() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const cosmeticList = document.getElementById('cosmeticList');
+
+    // Clear previous search results
+    cosmeticList.innerHTML = '';
+
+    // Fetch cosmetic data from Fortnite API
+    $.ajax({
+        url: `${fortniteApiUrl}?search=${searchInput}`,
+        method: 'GET',
+        headers: {
+            'x-api-key': apiKey
+        },
+        success: function (response) {
+            const cosmetics = response.data;
+            displayCosmetics(cosmetics, cosmeticList);
+        }
+    });
+}
+
+function displayCosmetics(cosmetics, cosmeticList) {
+    cosmetics.forEach(cosmetic => {
+        // Fetch cosmetic ID
+        fetchCosmeticId(cosmetic);
+    });
+}
+
+function fetchCosmeticId(cosmetic) {
+    const cosmeticName = cosmetic.name.toLowerCase();
+
+    $.ajax({
+        url: `${cosmeticListUrl}&name=${cosmeticName}`,
+        method: 'GET',
+        headers: {
+            'Authorization': fortniteApiIoApiKey
+        },
+        success: function (response) {
+            const cosmeticId = response.items[0]?.id;
+
+            if (cosmeticId) {
+                // If the ID is available, display it or use it as needed
+                displayCosmeticInfo(cosmetic, cosmeticId);
+            }
+        }
+    });
+}
+
+function displayCosmeticInfo(cosmetic, cosmeticId) {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list-group-item');
+
+    // Add colored rarity text using rarityscript
+    let rarityText = cosmetic.rarity.toLowerCase();
+    const raritySpan = document.createElement('span');
+    raritySpan.classList.add(rarityText);
+    raritySpan.textContent = cosmetic.rarity;
+    listItem.appendChild(raritySpan);
+
+    // Display cosmetic name, rarity, and description
+    listItem.innerHTML += ` - <strong>${cosmetic.name}</strong>`;
+    listItem.innerHTML += `<br>Description: ${cosmetic.description} `;
+    listItem.innerHTML += `<br>Type: ${cosmetic.readableType} `;
+    listItem.innerHTML += `<br>Slug: ${cosmetic.slug} `;
+    listItem.innerHTML += `<br>Cosmetic ID: ${cosmeticId}`;
+  //listItem.innerHTML += `<br>Shop History: ${cosmeticId}`;// Display the retrieved cosmetic ID
+    // Add price if available
+    if (cosmetic.price) {
+        const priceIcon = cosmetic.priceIconLink ? `<img src="https://image.fnbr.co/price/icon_vbucks.png" alt="${cosmetic.priceIcon}" height="20px">` : '';
+        listItem.innerHTML += `<br>Price: ${priceIcon}${cosmetic.price} `;
+    }
+
+    // Add image if available
+    if (cosmetic.images && cosmetic.images.icon) {
+        const img = document.createElement('img');
+        img.src = cosmetic.images.icon;
+        img.alt = cosmetic.name;
+        listItem.appendChild(img);
+    }
+
+    cosmeticList.appendChild(listItem);
+}
+  </script>
+</body>
+</html>
